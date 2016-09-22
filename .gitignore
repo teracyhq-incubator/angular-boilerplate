@@ -31,3 +31,9 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+# docker-compose
+.bash_history
+.config
+.local
+.pki

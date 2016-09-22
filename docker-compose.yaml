@@ -1,0 +1,56 @@
+version: '2'
+services:
+  cmd:
+    build: .
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  lint:
+    build: .
+    command: ng lint
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  serve:
+    build: .
+    command: ng serve --host 0.0.0.0
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "4200:4200"
+    # see: https://github.com/docker/compose/issues/2231#issuecomment-165137408
+    #tty: true # problem: https://github.com/docker/compose/issues/3783
+
+  # FIXME(hoatle): $ docker-compose up test should work repeatedly
+  test:
+    build: .
+    command: ng test --browsers Chrome_no_sandbox
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    privileged: true # for Chrome to run on Docker
+    # see: https://github.com/docker/compose/issues/2231#issuecomment-165137408
+    #tty: true # problem: https://github.com/docker/compose/issues/3783
+
+  # FIXME(hoatle): $ docker-compose up e2e should work
+  e2e:
+    build: .
+    command: ng e2e
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    #privileged: true # for Chrome to run on Docker
+    # see: https://github.com/docker/compose/issues/2231#issuecomment-165137408
+    #tty: true # problem: https://github.com/docker/compose/issues/3783
