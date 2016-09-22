@@ -2,7 +2,14 @@
 
 This project was generated with [docker-angular-cli](https://github.com/teracyhq/docker-angular-cli).
 
+## Getting started
+
+```
+$ git clone git@github.com:teracyhq/angular-boilerplate.git --depth=1 <project-name>
+```
+
 ## Development server
+
 Run `docker-compose up serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
@@ -29,3 +36,8 @@ Run `docker-compose run cmd /bin/bash` then `ng github-pages:deploy` to deploy t
 ## Further help
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## LICENSE
+
+MIT. See the LICENSE file.
+
