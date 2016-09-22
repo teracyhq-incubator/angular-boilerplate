@@ -2,15 +2,13 @@ FROM teracy/angular-cli
 
 MAINTAINER hoatle <hoatle@teracy.com>
 
-# pattern YYYMMDD:HHMMSS
-# update this when we want to rebuild the image, for example, to update npm modules
-ENV REFRESHED_AT 20160922:000000
+RUN useradd --user-group --create-home --shell /bin/false app
 
-ENV HOME=/usr/src/app
+ENV HOME=/home/app
 
-RUN mkdir $HOME 
+WORKDIR $HOME
 
-COPY package.json $HOME/
+COPY package.json $HOME
 
 WORKDIR $HOME
 

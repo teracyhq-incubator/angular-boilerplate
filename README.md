@@ -1,5 +1,8 @@
 # angular-boilerplate
 
+The seed project to start working on Angular 2 projects with best practices for Docker, Webpack,
+angular-cli, CI, CD, server side rendering, native mobile apps, desktop app, etc.
+
 This project was generated with [docker-angular-cli](https://github.com/teracyhq/docker-angular-cli).
 
 ## Getting started
