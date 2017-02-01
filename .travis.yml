@@ -1,26 +1,32 @@
 services:
 - docker
 env:
-  matrix:
-  - DOCKER_FILE=Dockerfile-dev IMAGE_TAG_PREFIX=dev_
-  # - DOCKER_FILE=Dockerfile     IMAGE_TAG_PREFIX=
   global:
   - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
   - CI_REGISTRY_IMAGE=$DOCKER_IMAGE
 before_script:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH | sed -e 's/[\/]/-/g' | sed -e 's/[\#]//g'; fi`
-- export CONTAINER_IMAGE=$CI_REGISTRY_IMAGE:$IMAGE_TAG_PREFIX$TAG
+- export DEV_CONTAINER_IMAGE=$CI_REGISTRY_IMAGE:dev_$TAG
+- export PROD_CONTAINER_IMAGE=$CI_REGISTRY_IMAGE:$TAG
 script:
-- docker build -f $DOCKER_FILE -q --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
+- docker build -f Dockerfile-dev -q --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
   CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$TRAVIS_BRANCH --build-arg
   CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
-  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --pull -t $CONTAINER_IMAGE .
+  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --pull -t $DEV_CONTAINER_IMAGE .
 # run and check the dev container
-- docker tag $CONTAINER_IMAGE angular-boilerplate:ci
+- docker tag $DEV_CONTAINER_IMAGE angular-boilerplate:ci
 - docker run --name angular-boilerplate -v $(pwd):/opt/app -p 4200:4200 -d angular-boilerplate:ci npm run start
 - docker exec angular-boilerplate npm run lint
 - docker exec angular-boilerplate ng test --browsers Chrome_no_sandbox -w false
 - docker exec angular-boilerplate npm run e2e
+# build, run and check the prod image
+- sudo rm -rf .com.google.Chrome*
+- docker exec angular-boilerplate ng build --prod
+- docker build -q --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
+  CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$TRAVIS_BRANCH --build-arg
+  CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
+  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --pull -t $PROD_CONTAINER_IMAGE .
 after_success:
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
-- docker push $CONTAINER_IMAGE
+- docker push $DEV_CONTAINER_IMAGE
+- docker push $PROD_CONTAINER_IMAGE
