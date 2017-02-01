@@ -15,9 +15,12 @@ script:
   CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$TRAVIS_BRANCH --build-arg
   CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
   CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --pull -t $CONTAINER_IMAGE .
-- docker run --rm -v $(pwd):/opt/app $CONTAINER_IMAGE npm run lint
-- docker run --rm -v $(pwd):/opt/app $CONTAINER_IMAGE ng test --browsers Chrome_no_sandbox -w false
-# - docker run -v $(pwd):/opt/app $CONTAINER_IMAGE npm run e2e
+# run and check the dev container
+- docker tag $CONTAINER_IMAGE angular-boilerplate:ci
+- docker run --name angular-boilerplate -v $(pwd):/opt/app -p 4200:4200 -d angular-boilerplate:ci npm run start
+- docker exec angular-boilerplate npm run lint
+- docker exec angular-boilerplate ng test --browsers Chrome_no_sandbox -w false
+- docker exec angular-boilerplate npm run e2e
 after_success:
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - docker push $CONTAINER_IMAGE
