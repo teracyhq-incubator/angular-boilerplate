@@ -1,0 +1,23 @@
+services:
+- docker
+env:
+  matrix:
+  - DOCKER_FILE=Dockerfile-dev IMAGE_TAG_PREFIX=dev_
+  # - DOCKER_FILE=Dockerfile     IMAGE_TAG_PREFIX=
+  global:
+  - CI_BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+  - CI_REGISTRY_IMAGE=$DOCKER_IMAGE
+before_script:
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH | sed -e 's/[\/]/-/g' | sed -e 's/[\#]//g'; fi`
+- export CONTAINER_IMAGE=$CI_REGISTRY_IMAGE:$IMAGE_TAG_PREFIX$TAG
+script:
+- docker build -f $DOCKER_FILE --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
+  CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$TRAVIS_BRANCH --build-arg
+  CI_BUILD_TIME=$CI_BUILD_TIME --build-arg CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE --build-arg
+  CI_PROJECT_NAME=$TRAVIS_REPO_SLUG --pull -t $CONTAINER_IMAGE .
+- docker run --rm -v $(pwd):/opt/app $CONTAINER_IMAGE npm run lint
+- docker run --rm -v $(pwd):/opt/app $CONTAINER_IMAGE ng test --browsers Chrome_no_sandbox -w false
+# - docker run -v $(pwd):/opt/app $CONTAINER_IMAGE npm run e2e
+after_success:
+- docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+- docker push $CONTAINER_IMAGE
