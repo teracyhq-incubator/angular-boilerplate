@@ -20,6 +20,7 @@ script:
 - docker exec angular-boilerplate ng test --browsers Chrome_no_sandbox -w false
 - docker exec angular-boilerplate npm run e2e
 # build, run and check the prod image
+- sudo rm -rf .com.google.Chrome*
 - docker exec angular-boilerplate ng build --prod
 - docker build -q --build-arg CI_BUILD_ID=$TRAVIS_BUILD_ID --build-arg
   CI_BUILD_REF=$TRAVIS_COMMIT --build-arg CI_BUILD_REF_NAME=$TRAVIS_BRANCH --build-arg
