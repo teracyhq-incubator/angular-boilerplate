@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  prod:
+    build: .
+    image: ${PROD_DOCKER_IMAGE}
+    ports:
+      - 8080:80

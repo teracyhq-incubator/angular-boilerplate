@@ -38,3 +38,9 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+
+# angular-boilerplate
+.env
+package.json
+docker-compose.yml
+docker-compose.prod.yml

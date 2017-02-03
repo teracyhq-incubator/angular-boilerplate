@@ -5,11 +5,11 @@ services:
       context: .
       dockerfile: Dockerfile-dev
     # we use image for faster developing with `npm install` already run
-    image: teracy/angular-boilerplate:dev_develop
+    image: ${DEV_DOCKER_IMAGE}
     command: bash -c "npm run start"
     environment:
       NODE_ENV: development
     volumes:
       - .:/opt/app
     ports:
-      - "4200:4200"
+      - 4200:4200

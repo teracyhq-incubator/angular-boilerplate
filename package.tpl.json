@@ -1,6 +1,6 @@
 {
-  "name": "angular-boilerplate",
-  "version": "0.1.0",
+  "name": "${PROJECT_NAME}",
+  "version": "${PROJECT_VERSION}",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
