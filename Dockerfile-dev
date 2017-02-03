@@ -22,6 +22,6 @@ ADD package.json $APP/
 
 WORKDIR $APP
 
-RUN rm -rf node_modules && npm install
+RUN npm install --loglevel=warn
 
 VOLUME $APP/node_modules

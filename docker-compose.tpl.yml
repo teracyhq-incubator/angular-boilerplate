@@ -4,6 +4,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-dev
+      args:
+        - CI_BUILD_ID=${CI_BUILD_ID}
+        - CI_BUILD_REF=${CI_BUILD_REF}
+        - CI_BUILD_REF_NAME=${CI_BUILD_REF_NAME}
+        - CI_BUILD_TIME=${CI_BUILD_TIME}
+        - CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE}
+        - CI_PROJECT_NAME=${CI_PROJECT_NAME}
     # we use image for faster developing with `npm install` already run
     image: ${DEV_DOCKER_IMAGE}
     command: bash -c "npm run start"
