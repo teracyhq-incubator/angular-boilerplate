@@ -2,7 +2,15 @@ version: "2"
 
 services:
   prod:
-    build: .
+    build:
+      context: .
+      args:
+        - CI_BUILD_ID=${CI_BUILD_ID}
+        - CI_BUILD_REF=${CI_BUILD_REF}
+        - CI_BUILD_REF_NAME=${CI_BUILD_REF_NAME}
+        - CI_BUILD_TIME=${CI_BUILD_TIME}
+        - CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE}
+        - CI_PROJECT_NAME=${CI_PROJECT_NAME}
     image: ${PROD_DOCKER_IMAGE}
     ports:
       - 8080:80

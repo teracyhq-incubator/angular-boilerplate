@@ -1,16 +1,13 @@
 #!/bin/bash
 
-set -a
-source .env
-
 # generate package.json
 rm -rf package.json
-cat package.tpl.json | envsubst > package.json
+envsubst '${PROJECT_NAME} ${PROJECT_VERSION}' <package.tpl.json >package.json
 
 # generate docker-compose.yml
 rm -rf docker-compose.yml
-cat docker-compose.tpl.yml | envsubst > docker-compose.yml
+envsubst '${DEV_DOCKER_IMAGE}' <docker-compose.tpl.yml >docker-compose.yml
 
 # generate docker-compose.prod.yml
 rm -rf docker-compose.prod.yml
-cat docker-compose.prod.tpl.yml | envsubst > docker-compose.prod.yml
+envsubst '${PROD_DOCKER_IMAGE}' <docker-compose.prod.tpl.yml >docker-compose.prod.yml
