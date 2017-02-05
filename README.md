@@ -1,4 +1,4 @@
-# angular-boilerplate
+# angular-boilerplate [![Build Status](https://travis-ci.org/teracyhq/angular-boilerplate.svg?branch=develop)](https://travis-ci.org/teracyhq/angular-boilerplate)
 
 This project was generated with
 [teracy/angular-cli:1.0.0-beta.30](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
