@@ -1,6 +1,7 @@
 # angular-boilerplate
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.30.
+This project was generated with
+[teracy/angular-cli:1.0.0-beta.30](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
 
 This project was created from [angular-boilerplate](https://github.com/teracyhq/angular-boilerplate)
 version 0.1.0-SNAPSHOT.
