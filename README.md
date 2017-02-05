@@ -70,6 +70,7 @@ Remove these lines from `.gitignore` to keep these files on your project:
 ```
 # angular-boilerplate
 .env
+angular-cli.json
 package.json
 docker-compose.yml
 docker-compose.prod.yml
