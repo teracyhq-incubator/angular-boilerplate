@@ -1,6 +1,6 @@
 # angular-boilerplate
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.30.
 
 This project was created from [angular-boilerplate](https://github.com/teracyhq/angular-boilerplate)
 version 0.1.0-SNAPSHOT.
