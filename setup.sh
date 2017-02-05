@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# generate angular-cli.json
+rm -rf angular-cli.json
+envsubst '${PROJECT_NAME}' <angular-cli.tpl.json >angular-cli.json
+
 # generate package.json
 rm -rf package.json
 envsubst '${PROJECT_NAME} ${PROJECT_VERSION}' <package.tpl.json >package.json

@@ -41,6 +41,7 @@ Thumbs.db
 
 # angular-boilerplate
 .env
+angular-cli.json
 package.json
 docker-compose.yml
 docker-compose.prod.yml
