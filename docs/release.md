@@ -1,4 +1,4 @@
-# Release Process
+# Release Steps
 
 Follow: http://dev.teracy.org/docs/develop/release_process.html
 
@@ -9,3 +9,7 @@ Follow: http://dev.teracy.org/docs/develop/release_process.html
 ## .env.example
 
 - Update the right version and right tags
+
+## CHANGELOG.md
+
+- Update for the change log file
