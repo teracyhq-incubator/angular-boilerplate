@@ -1,10 +1,10 @@
-# angular-boilerplate [![Build Status](https://travis-ci.org/teracyhq/angular-boilerplate.svg?branch=develop)](https://travis-ci.org/teracyhq/angular-boilerplate)
+# angular-boilerplate [![Build Status](https://travis-ci.org/teracyhq/angular-boilerplate.svg?branch=master)](https://travis-ci.org/teracyhq/angular-boilerplate)
 
 This project was generated with
 [teracy/angular-cli:1.0.0-beta.30](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
 
 This project was created from [angular-boilerplate](https://github.com/teracyhq/angular-boilerplate)
-version 0.1.0-SNAPSHOT.
+version 0.1.0.
 
 ## New project setup
 
