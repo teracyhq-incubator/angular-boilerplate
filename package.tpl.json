@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0",
+    "start": "ng serve --host=0.0.0.0 --liveReloadClient http://${DOMAIN_DEV}",
     "build": "ng build",
     "test": "ng test --browsers Chrome_no_sandbox",
     "lint": "ng lint",

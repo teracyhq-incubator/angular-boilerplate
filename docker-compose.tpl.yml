@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  
+
   dev:
     build:
       context: .
@@ -18,7 +18,13 @@ services:
     command: bash -c "yarn run start"
     environment:
       NODE_ENV: development
+      VIRTUAL_HOST: ${DOMAIN_DEV}
+      HTTPS_METHOD: noredirect # support both http and https
     volumes:
       - .:/opt/app
     ports:
-      - 4200:4200
+      - "4200"
+    restart: unless-stopped
+    # to get this work with https://github.com/jwilder/nginx-proxy
+    # related: https://github.com/jwilder/nginx-proxy/issues/305
+    network_mode: bridge
