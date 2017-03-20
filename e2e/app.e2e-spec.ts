@@ -1,6 +1,6 @@
 import { AngularBoilerplatePage } from './app.po';
 
-describe('angular-boilerplate App', function() {
+describe('angular-boilerplate App', () => {
   let page: AngularBoilerplatePage;
 
   beforeEach(() => {

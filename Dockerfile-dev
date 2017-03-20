@@ -1,4 +1,4 @@
-FROM teracy/angular-cli:1.0.0-beta.30
+FROM teracy/angular-cli:1.0.0-rc.2
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
@@ -22,6 +22,6 @@ ADD package.json $APP/
 
 WORKDIR $APP
 
-RUN npm install --loglevel=warn
+RUN yarn
 
 VOLUME $APP/node_modules

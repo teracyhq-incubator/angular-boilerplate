@@ -1,6 +1,7 @@
-version: "2"
+version: '3'
 
 services:
+
   prod:
     build:
       context: .
@@ -11,6 +12,6 @@ services:
         - CI_BUILD_TIME=${CI_BUILD_TIME}
         - CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE}
         - CI_PROJECT_NAME=${CI_PROJECT_NAME}
-    image: ${PROD_DOCKER_IMAGE}
+    image: ${DOCKER_IMAGE_PROD:-${DOCKER_IMAGE_PROD}}
     ports:
       - 8080:80

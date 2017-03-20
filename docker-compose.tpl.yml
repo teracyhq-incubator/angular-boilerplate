@@ -1,5 +1,7 @@
-version: '2'
+version: '3'
+
 services:
+  
   dev:
     build:
       context: .
@@ -12,8 +14,8 @@ services:
         - CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE}
         - CI_PROJECT_NAME=${CI_PROJECT_NAME}
     # we use image for faster developing with `npm install` already run
-    image: ${DEV_DOCKER_IMAGE}
-    command: bash -c "npm run start"
+    image: ${DOCKER_IMAGE_DEV:-${DOCKER_IMAGE_DEV}}
+    command: bash -c "yarn run start"
     environment:
       NODE_ENV: development
     volumes:

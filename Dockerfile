@@ -1,4 +1,4 @@
-FROM nginx:1.11
+FROM nginx:1.11-alpine
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
