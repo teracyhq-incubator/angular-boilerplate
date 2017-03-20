@@ -3,6 +3,7 @@ version: '3'
 services:
 
   prod:
+    container_name: ${PROJECT_NAME}_dev
     build:
       context: .
       args:

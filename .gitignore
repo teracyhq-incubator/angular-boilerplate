@@ -1,11 +1,11 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+/dist/*
 /tmp
 
 # dependencies
-/node_modules
+/node_modules/*
 
 # IDEs and editors
 /.idea
@@ -39,6 +39,9 @@ testem.log
 .DS_Store
 Thumbs.db
 .env
+# for teracy-dev file mapping
+!dist/.gitkeep
+!node_modules/.gitkeep
 
 # angular-boilerplate
 .angular-cli.json

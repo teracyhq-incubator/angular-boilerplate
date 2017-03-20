@@ -3,6 +3,7 @@ version: '3'
 services:
 
   dev:
+    container_name: ${PROJECT_NAME}_dev
     build:
       context: .
       dockerfile: Dockerfile-dev
