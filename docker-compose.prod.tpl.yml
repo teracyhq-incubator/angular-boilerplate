@@ -13,5 +13,12 @@ services:
         - CI_REGISTRY_IMAGE=${CI_REGISTRY_IMAGE}
         - CI_PROJECT_NAME=${CI_PROJECT_NAME}
     image: ${DOCKER_IMAGE_PROD:-${DOCKER_IMAGE_PROD}}
+    environment:
+      VIRTUAL_HOST: ${DOMAIN_PROD}
+      HTTPS_METHOD: noredirect # support both http and https
     ports:
-      - 8080:80
+      - "80"
+    restart: unless-stopped
+    # to get this work with https://github.com/jwilder/nginx-proxy
+    # related: https://github.com/jwilder/nginx-proxy/issues/305
+    network_mode: bridge
