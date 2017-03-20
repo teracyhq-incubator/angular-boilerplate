@@ -1,7 +1,7 @@
 # angular-boilerplate [![Build Status](https://travis-ci.org/teracyhq/angular-boilerplate.svg?branch=develop)](https://travis-ci.org/teracyhq/angular-boilerplate)
 
 This project was generated with
-[teracy/angular-cli:1.0.0-beta.30](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
+[teracy/angular-cli:1.0.0-rc.2](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
 
 This project was created from [angular-boilerplate](https://github.com/teracyhq/angular-boilerplate)
 version 0.2.0-SNAPSHOT.
@@ -52,7 +52,7 @@ $ vagrant ssh
 $ ws
 $ cd <your_project_name>
 $ export $(cat .env | grep -v ^# | xargs) # to export enviroment variables defined on the .env file
-$ ./setup.sh # to generate package.json, docker-compose.yml and docker-compose.prod.yml files
+$ ./setup.sh # to generate .angular-cli.json, package.json, docker-compose.yml and docker-compose.prod.yml files
 ```
 
 Execute the following command to
@@ -71,7 +71,7 @@ Remove these lines from `.gitignore` to keep these files on your project:
 ```
 # angular-boilerplate
 .env
-angular-cli.json
+.angular-cli.json
 package.json
 docker-compose.yml
 docker-compose.prod.yml
@@ -92,45 +92,24 @@ Docker images. (See .travis.yml for reference)
 You should see the similar following output:
 
 ```
-Attaching to angularhelloworld_dev_1
-dev_1  | Starting virtual X frame buffer: Xvfb.
-dev_1  | Executing command bash -c npm run start
-dev_1  | npm info it worked if it ends with ok
-dev_1  | npm info using npm@3.10.10
-dev_1  | npm info using node@v6.9.5
-dev_1  | npm info lifecycle angular-hello-world@0.1.0-snapshot~prestart: angular-hello-world@0.1.0-snapshot
-dev_1  | npm info lifecycle angular-hello-world@0.1.0-snapshot~start: angular-hello-world@0.1.0-snapshot
-dev_1  | 
-dev_1  | > angular-hello-world@0.1.0-snapshot start /opt/app
-dev_1  | > ng serve --host 0.0.0.0
-dev_1  | 
-dev_1  | As a forewarning, we are moving the CLI npm package to "@angular/cli" with the next release,
-dev_1  | which will only support Node 6.9 and greater. This package will be officially deprecated
-dev_1  | shortly after.
-dev_1  | 
-dev_1  | To disable this warning use "ng set --global warnings.packageDeprecation=false".
-dev_1  | 
-dev_1  | fallbackLoader option has been deprecated - replace with "fallback"
-dev_1  | loader option has been deprecated - replace with "use"
-dev_1  | fallbackLoader option has been deprecated - replace with "fallback"
-dev_1  | loader option has been deprecated - replace with "use"
-dev_1  | fallbackLoader option has been deprecated - replace with "fallback"
-dev_1  | loader option has been deprecated - replace with "use"
-dev_1  | fallbackLoader option has been deprecated - replace with "fallback"
-dev_1  | loader option has been deprecated - replace with "use"
-dev_1  | ** NG Live Development Server is running on http://0.0.0.0:4200. **
-dev_1  |  69% building modules 698/699 modules 1 active  Hash: c3d11ef93ff9712314cc               
-dev_1  | Time: 12942ms
-dev_1  | chunk    {0} polyfills.bundle.js, polyfills.bundle.map (polyfills) 222 kB {4} [initial] [rendered]
-dev_1  | chunk    {1} main.bundle.js, main.bundle.map (main) 3.87 kB {3} [initial] [rendered]
-dev_1  | chunk    {2} styles.bundle.js, styles.bundle.map (styles) 10.1 kB {4} [initial] [rendered]
-dev_1  | chunk    {3} vendor.bundle.js, vendor.bundle.map (vendor) 2.62 MB [initial] [rendered]
-dev_1  | chunk    {4} inline.bundle.js, inline.bundle.map (inline) 0 bytes [entry] [rendered]
-dev_1  | webpack: Compiled successfully.
+Creating angular-boilerplate-dev
+Attaching to angular-boilerplate-dev
+angular-boilerplate-dev | Starting virtual X frame buffer: Xvfb.
+angular-boilerplate-dev | Executing command bash -c yarn run start
+angular-boilerplate-dev | yarn run v0.21.3
+angular-boilerplate-dev | $ ng serve --host=0.0.0.0 
+angular-boilerplate-dev | ** NG Live Development Server is running on http://0.0.0.0:4200 **
+angular-boilerplate-dev Hash: d8df844d0c9cdfe14f5e                                                               s
+angular-boilerplate-dev | Time: 14272ms
+angular-boilerplate-dev | chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 157 kB {4} [initial] [rendered]
+angular-boilerplate-dev | chunk    {1} main.bundle.js, main.bundle.js.map (main) 4.04 kB {3} [initial] [rendered]
+angular-boilerplate-dev | chunk    {2} styles.bundle.js, styles.bundle.js.map (styles) 9.89 kB {4} [initial] [rendered]
+angular-boilerplate-dev | chunk    {3} vendor.bundle.js, vendor.bundle.js.map (vendor) 2.69 MB [initial] [rendered]
+angular-boilerplate-dev | chunk    {4} inline.bundle.js, inline.bundle.js.map (inline) 0 bytes [entry] [rendered]
+angular-boilerplate-dev | webpack: Compiled successfully.
 ```
 
-Identify the [vm_ip_address](http://dev.teracy.org/docs/develop/basic_usage.html#ip-address) and
-open \<vm_ip_address>:4200 on your browser to start developing. The app will automatically reload
+Open teracy.dev:4200 on your browser to start developing. The app will automatically reload
 when you change any of the source files.
 
 
@@ -143,27 +122,30 @@ $ cd ~/teracy-dev
 $ vagrant ssh
 $ ws
 $ cd <your_project_name>
-$ docker-compose exec dev <ng command>
+$ docker-compose run --rm dev <ng command>
 ```
 
 <ng command> could be `ng generate component component-name` to generate a new component. You can
 also use `ng generate directive/pipe/service/class/module`.
 
+Remember to sync back the generated files to the host machine with `$ vagrant rsync-back`:
+http://dev.teracy.org/docs/basic_usage.html#file-sync
+
 ## Run code linting
 
-Run `$ docker-compose exec dev npm run lint` to execute the code lint checking.
+Run `$ docker-compose run --rm dev yarn run lint` to execute the code lint checking.
 
 ## Run unit tests
 
-Run `$ docker-compose exec dev npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `$ docker-compose run --rm dev yarn run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 This will keep the tests running and watching the file changes.
 
-To run unit tests without file watching, run `$ docker-compose exec dev ng test --browsers Chrome_no_sandbox -w false`
+To run unit tests without file watching, run `$ docker-compose run --rm dev ng test --browsers Chrome_no_sandbox -w false`
 
 ## Run end-to-end tests
 
-Run `$ docker-compose exec dev npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `$ docker-compose run --rm dev yarn run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Run the bash command on the running Dev Docker image
 
@@ -191,7 +173,7 @@ to check the `dist/` directory.
 $ docker-compose -f docker-compose.prod.yml up
 ```
 
-And open \<vm_ip_address>:8080 to see the app in production mode served by nginx.
+And open teracy.dev:8080 to see the app in production mode served by nginx.
 
 
 ## Contribute to angular-boilerplate project
