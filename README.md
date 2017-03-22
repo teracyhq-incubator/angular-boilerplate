@@ -9,7 +9,7 @@ version 0.2.0.
 ## New project setup
 
 - You need `docker` and `docker-compose` available, so please set up
-  [teracy-dev](http://dev.teracy.org/docs/develop/getting_started.html) as the following described
+  [teracy-dev](http://dev.teracy.org/docs/getting_started.html) as the following described
   steps works with `teracy-dev`. Note that the 1st terminal window after `$ vagrant up` should be
   kept running for file watching.
 
