@@ -7,14 +7,16 @@ env:
     DOCKER_COMPOSE_VERSION: 1.11.2
 before_install:
   # install the latest docker and docker-compose versions
-  - sudo apt-get remove docker docker-engine
-  - sudo curl -sSL https://get.docker.com/ | sh
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - docker --version
-  - docker-compose --version
+- sudo apt-get remove docker docker-engine
+- sudo curl -sSL https://get.docker.com/ | sh
+- sudo rm /usr/local/bin/docker-compose
+# the latest docker-compose version
+- export DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
+- curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+- chmod +x docker-compose
+- sudo mv docker-compose /usr/local/bin
+- docker version
+- docker-compose version
 before_script:
 - cp .env.example .env
 - export $(cat .env | grep -v ^# | xargs)
