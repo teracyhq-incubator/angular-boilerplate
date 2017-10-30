@@ -4,7 +4,6 @@ env:
   global:
     CI_BUILD_TIME: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
     CI_REGISTRY_IMAGE: $DOCKER_IMAGE
-    DOCKER_COMPOSE_VERSION: 1.11.2
 before_install:
   # install the latest docker and docker-compose versions
 - sudo apt-get remove docker docker-engine
