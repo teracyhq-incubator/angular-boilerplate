@@ -31,9 +31,9 @@ before_script:
 script:
 - docker-compose build --pull
 # run and check the dev container
-- docker-compose run --rm dev npm run lint
+- docker-compose run --rm dev yarn run lint
 - docker-compose run --rm dev ng test --browsers Chrome_no_sandbox -w false
-- docker-compose run --rm dev npm run e2e
+- docker-compose run --rm dev yarn run e2e
 # build, run and check the prod image
 - sudo rm -rf .com.google.Chrome*
 - docker-compose run --rm dev ng build --prod

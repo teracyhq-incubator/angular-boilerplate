@@ -1,7 +1,7 @@
 # angular-boilerplate [![Build Status](https://travis-ci.org/teracyhq/angular-boilerplate.svg?branch=develop)](https://travis-ci.org/teracyhq/angular-boilerplate)
 
 This project was generated with
-[teracy/angular-cli:1.0.0-rc.2](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
+[teracy/angular-cli:1.4.9](https://hub.docker.com/r/teracy/angular-cli/) Docker image.
 
 This project was created from [angular-boilerplate](https://github.com/teracyhq/angular-boilerplate)
 version 0.3.0-SNAPSHOT.
@@ -21,7 +21,7 @@ $ cd ~/teracy-dev/workspace
 $ mkdir <your_project_name>
 $ cd <your_project_name>
 $ git init
-$ git remote add seed https://github.com/teracyhq/angular-boilerplate.git
+$ git remote add seed https://github.com/teracyhq-incubator/angular-boilerplate.git
 $ git pull seed master # or develop branch if you want to have the latest development features
 $ cp .env.example .env # and adjust the variables matching your project details
 ```
