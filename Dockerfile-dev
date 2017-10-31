@@ -1,4 +1,6 @@
-FROM teracy/angular-cli:1.0.0-rc.2
+ARG ANGULAR_CLI_VERSION=1.4.9
+
+FROM teracy/angular-cli:$ANGULAR_CLI_VERSION
 
 LABEL authors="hoatle <hoatle@teracy.com>"
 
